@@ -8,16 +8,16 @@ class App extends Component {
 
     componentDidMount(){
         fetch("http://api.open-notify.org/astros.json")
-        .then(resp => resp.json)
-        .then(obj => 
-            this.setState({ fetchContainer: obj})
-            )
+        .then(resp => resp.json())
+        .then(obj => this.setState({ fetchContainer: obj.people}) )
     }
 
     render(){
 
+        const people = this.state.fetchContainer.map((p, id) => <div key={id}>{p.name}</div>)
+
         return(
-        <div>{this.state.fetchContainer}</div>
+        <div>{people}</div>
         )
     }
 
